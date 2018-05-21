@@ -11,6 +11,12 @@ O(n*logn)级别的排序
     分成log(n)个层级 每个层级进行O(n)排序
     每次归并时 开辟一个新的存储空间作为辅助 因此需要使用O(n)多的空间
     用三个索引进行归并 时间复杂度O(n)
+    当n比较小的时候 由于复杂度前面都有常数项 因此 归并有时比插入排序满 可在此处进行优化
+    自底向上的归并排序 由于没有用到数组下标 因此可以用于链表排序O(n*logn)
+\-快速排序
+    选定元素挪到正确位置,挪动的过程也是分离大于选定元素 和 小于选定元素的过程
+    递归选定元素两侧的数组进行快排
+
 
 
 '''
@@ -79,16 +85,30 @@ def __merge(arr, l, mid, r):
             j+=1
 
 
-
+def insertionSort4Ms(arr, l, r):
+    for i in range(l, r+1):
+        j = i
+        temp = arr[i]
+        while((j > l) and (arr[j-1] > temp)):
+            arr[j] = arr[j-1]
+            j -= 1
+        arr[j] = temp
+    return
 
 # 递归的使用归并排序arr[l...r]
 def __mergeSort(arr, l, r):
-    if l >= r:
+    # if l >= r:
+    #     return
+    # 此处优化 在n比较小时 调用插入排序
+    if (r-l) <= 15:
+        insertionSort4Ms(arr, l, r)
         return
     mid = int((l+r) / 2)
     __mergeSort(arr, l, mid)
     __mergeSort(arr, mid+1, r)
-    __merge(arr, l, mid, r)
+    # 若有序 无需再合并了
+    if (arr[mid] > arr[mid+1]):
+        __merge(arr, l, mid, r)
 
 
 def mergeSort(arr, n):
@@ -96,15 +116,52 @@ def mergeSort(arr, n):
     __mergeSort(arr, 0, n-1)
 
 
+# 自底向上归并排序(由于没有用到数组下标 因此可以用于链表排序)
+def mergeSortBU(arr, n):
+    size = 1
+    while (size <= n):
+        i = 0
+        while (i + size < n):
+            __merge(arr, i, i+size-1, min(i+size+size-1, n-1))
+            i += (size + size)
+        size += size
+
+
+# 对arr[l...r]进行partition
+def __partition(arr, l, r):
+    temp = arr[l]
+    j = l
+    for i in range(l+1, r+1):
+        if (temp > arr[i]):
+            swap(arr, j+1, i)
+            j+=1
+    swap(arr, j, l)
+    return j
+
+
+# 对arr[l...r]进行快速排序
+def __quickSort(arr, l, r):
+    if (l>=r):
+        return  # 别忘了这个啊 要不然死循环了
+    p = __partition(arr, l, r)
+    __quickSort(arr, l, p-1)
+    __quickSort(arr, p+1, r)
+
+# 快速排序
+def quickSort(arr, n):
+    __quickSort(arr, 0, n-1)
+
+
 
 
 
 if __name__ == '__main__':
-    n = 10000
+    n = 1000000
     start = 0
-    end = 10000
+    end = 1000000
     # arr = genNearlyOrderArray(n, swapTimes=100)
     arr = genRandomArray(n, start, end)
     arr2 = arr[:]
     arr3 = arr[:]
     testSort(mergeSort, arr, n)
+    testSort(quickSort, arr2, n)

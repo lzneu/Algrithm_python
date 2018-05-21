@@ -135,9 +135,9 @@ def shellSort(arr, n):
 
 
 if __name__ == '__main__':
-    n = 10000
+    n = 100000
     start = 0
-    end = 10000
+    end = 100000
     # arr = genNearlyOrderArray(n, swapTimes=100)
     arr = genRandomArray(n, start, end)
     arr2 = arr[:]
