@@ -66,8 +66,8 @@ def swap(arr, i, j):
 
 
 def isSorted(arr, n):
-    for i in range(n-1):
-        if(arr[i] > arr[i+1]):
+    for i in range(n - 1):
+        if (arr[i] > arr[i + 1]):
             return False
     return True
 
@@ -76,7 +76,7 @@ def selectonSort(arr, n):
     for i in range(n):
         # 寻找[i, n)区间里面的最小值
         minIndex = i
-        for j in range(i+1, n):
+        for j in range(i + 1, n):
             if (arr[j] < arr[minIndex]):
                 swap(arr, minIndex, j)
 
@@ -85,9 +85,9 @@ def insertionSort(arr, n):
     for i in range(1, n):
         # 寻找arr[i]合适的插入位置
         j = i
-        while j > 0 and arr[j] < arr[j-1]:
-            swap(arr, j, j-1)
-            j-=1
+        while j > 0 and arr[j] < arr[j - 1]:
+            swap(arr, j, j - 1)
+            j -= 1
 
 
 def insertionSort2(arr, n):
@@ -95,10 +95,10 @@ def insertionSort2(arr, n):
         # 寻找arr[i]合适的插入位置
         j = i
         temp = arr[i]
-        while j > 0 and arr[j-1] > temp:
+        while j > 0 and arr[j - 1] > temp:
             # 副本存储代替每次交换
-            arr[j] = arr[j-1]
-            j-=1
+            arr[j] = arr[j - 1]
+            j -= 1
         arr[j] = temp
 
 
@@ -112,25 +112,24 @@ def bubbleSort(arr, n):
         ite = list(range(i, n))
         ite.reverse()
         for j in ite:
-            if (arr[j] < arr[j-1]):
-                swap(arr, j, j-1)
+            if (arr[j] < arr[j - 1]):
+                swap(arr, j, j - 1)
                 flag = True
 
 
 def shellSort(arr, n):
-
     increment = n
     while (increment > 1):
         increment = increment // 3 + 1
         for i in range(increment, n):
-            if (arr[i] < arr[i-increment]):
+            if (arr[i] < arr[i - increment]):
                 # 将 arr[i]插入有序增量子表
                 temp = arr[i]
                 j = i - increment
-                while (j>=0 and arr[j] > temp):
-                    arr[j+increment] = arr[j]
+                while (j >= 0 and arr[j] > temp):
+                    arr[j + increment] = arr[j]
                     j -= increment
-                arr[j+increment] = temp
+                arr[j + increment] = temp
     return arr
 
 
