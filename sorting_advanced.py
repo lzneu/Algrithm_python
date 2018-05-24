@@ -43,11 +43,10 @@ O(n*logn)级别的排序:
         复杂度O(n)
 '''
 
-# 生成一个近乎有序的数组
 import datetime
 import random
 import numpy as np
-
+# 生成一个近乎有序的数组
 def genNearlyOrderArray(n, swapTimes):
     arr = list(range(n))
     for i in range(swapTimes):
@@ -212,7 +211,7 @@ def __quickSort2(arr, l, r):
     __quickSort2(arr, p + 1, r)
 
 
-# 二路快排 将=temp的元素分散到两个集合中,避免平衡树不平衡
+# 二路快排 将=temp的元素分散到两个       集合中,避免平衡树不平衡
 def quickSort2(arr, n):
     __quickSort2(arr, 0, n - 1)
 
@@ -259,9 +258,9 @@ if __name__ == '__main__':
     end = 10000
     arr = genNearlyOrderArray(n, swapTimes=100)
     arr = genRandomArray(n, start, end)
-    arr2 = arr[:]
-    arr3 = arr[:]
-    arr4 = arr[:]
+    arr2 = arr.copy()
+    arr3 = arr.copy()
+    arr4 = arr.copy()
     aTestSort(mergeSort, arr, n)
     # aTestSort(quickSort, arr2, n)
     aTestSort(quickSort2, arr3, n)

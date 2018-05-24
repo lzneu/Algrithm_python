@@ -139,8 +139,8 @@ if __name__ == '__main__':
     end = 100000
     # arr = genNearlyOrderArray(n, swapTimes=100)
     arr = genRandomArray(n, start, end)
-    arr2 = arr[:]
-    arr3 = arr[:]
+    arr2 = arr.copy()
+    arr3 = arr.copy()
     testSort(shellSort, arr, n)
     testSort(insertionSort, arr2, n)
     testSort(insertionSort2, arr3, n)
