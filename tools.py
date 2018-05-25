@@ -11,8 +11,8 @@ import datetime
 def genNearlyOrderArray(n, swapTimes):
     arr = list(range(n))
     for i in range(swapTimes):
-        x = random.randint(0, n)
-        y = random.randint(0, n)
+        x = random.randint(0, n-1)
+        y = random.randint(0, n-1)
         swap(arr, x, y)
     return arr
 
@@ -42,3 +42,4 @@ def isSorted(arr, n):
         if (arr[i] > arr[i + 1]):
             return False
     return True
+
