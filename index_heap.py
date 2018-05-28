@@ -19,7 +19,6 @@ import timeit
 from random import randint
 
 #直接使用python的dict对象可以非常容易地实现索引堆。
-
 class IndexMaxHeap(object):
     def __init__(self):
         self.indexList=[0]
