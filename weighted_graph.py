@@ -17,10 +17,14 @@
         利用索引堆
         时间复杂度O(ElogV)
         对于边的判断次数减少
-
+    kruskal算法
+        O(ElogE)
+        利用并查集对图是否成环进行判断
 
 
 '''
+
+
 # 最小堆
 class MinHeap:
 
@@ -153,14 +157,14 @@ class DenseGraph:
         self.__m += 1
 
     def hasEdge(self, v, w):
-        assert (v >= 0 and v < self.__n)
-        assert (w >= 0 and w < self.__n)
+        assert (0 <= v < self.__n)
+        assert (0 <= w < self.__n)
         return self.g[v][w] is not None
 
     # 打印图的信息
     def show(self):
         for i in range(self.__n):
-            print('vertex%d'% i, end=':\t')
+            print('vertex%d' % i, end=':\t')
             for j in range(self.__n):
                 if self.g[i][j] is None:
                     print('None', end='\t')
@@ -170,8 +174,8 @@ class DenseGraph:
 
     # 返回v节点的邻接节点
     def getAdj(self, v):
-        retList= []
-        adjList= self.g[v]
+        retList = []
+        adjList = self.g[v]
         for adj in adjList:
             if adj is not None:
                 retList.append(adj)
@@ -301,10 +305,6 @@ class LasyPrimMST:
     # 返回最小生成树的所有边
     def mstEdges(self):
         return self.__mst
-
-
-
-
 
 
 if __name__ == '__main__':
