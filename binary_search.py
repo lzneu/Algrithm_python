@@ -64,6 +64,22 @@ def binarySearch(arr, n, target):
     # 没找到 返回-1
     return -1
 
+# 寻找第一个target 若不存在， 直接返回-1
+def floor(arr, target):
+    l = -1
+    r = len(arr) - 1
+    while l < r:
+        # 向上取整 避免死循环
+        mid = l + (r-l+1) // 2
+        if arr[mid] >= target:
+            r = mid - 1
+        else:
+            l = mid
+    assert l == r
+    if l + 1 <= len(arr) - 1 and arr[l-1] == target:
+        return l+1
+    return l
+
 
 # 二分搜索树
 class BST:
