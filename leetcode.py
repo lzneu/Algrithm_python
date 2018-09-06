@@ -1,27 +1,22 @@
-class Solution(object):
-    def longestCommonPrefix(self, strs):
-        """
-        :type strs: List[str]
-        :rtype: str
-        """
-        n = len(strs)
-        if n == 0:
-            return ''
-        res = 0
-        stop = False
-        m = len(strs[0])
-        for str1 in strs:
-            m = min(m, len(str1))
-        for i in range(m):
-            c = strs[0][i]
-            for j in range(1, n):
-                if c != strs[j][i]:
-                    res -= 1
-                    stop = True
-                    break
-            res += 1
-            if stop:
-                break
-        return strs[0][:res]
+# -*- coding:utf-8 -*-
 
-print(Solution().longestCommonPrefix(["aca","cba"]))
+class StringFormat:
+    def formatString(self, A, n, arg, m):
+        # write code here
+        A_list = A.split('%s')
+        # 边界 若第一个元素是‘s%’
+        if A[:1] == '%s':
+            res = arg[0]
+            arg.pop(0)
+        else:
+            res = ''
+        for i in range(len(A_list)):
+            res += A_list[i]
+            if len(arg) != 0:
+                res += arg[0]
+                arg.pop(0)
+        for c in arg:
+            res += c
+        return res
+
+print(StringFormat().formatString('A%sC%sE', 7, ['B','D','F'], 3))

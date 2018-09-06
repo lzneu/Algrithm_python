@@ -73,7 +73,7 @@ class MaxHeap:
             self.__swap(k // 2, k)
             k = k // 2
 
-    def insert(self, item):
+    def insert(self, item: object) -> object:
         self.__data.append(item)
         self.__count += 1
         self.__shiftUp(self.__count)
